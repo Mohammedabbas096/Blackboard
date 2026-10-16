@@ -1,0 +1,56 @@
+@{
+    Layout = "_RootLayout";
+}
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold"
+               asp-area="Admin" asp-controller="Home" asp-action="Index">Blackboard Admin</a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#adminNav"
+                    aria-controls="adminNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Major" ? "active fw-bold" : "")"
+                           asp-area="Admin" asp-controller="Major" asp-action="Index">Major</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Course" ? "active fw-bold" : "")"
+                           asp-area="Admin" asp-controller="Course" asp-action="Index">Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Student" ? "active fw-bold" : "")"
+                           asp-area="Admin" asp-controller="Student" asp-action="Index">Student</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-warning"
+                           asp-area="Student" asp-controller="Home" asp-action="Index">View Site</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted mt-4">
+    <div class="container py-2">
+        &copy; 2026 - Group 1 Blackboard &mdash; Admin Panel
+    </div>
+</footer>
+
+@section Scripts {
+    @await RenderSectionAsync("Scripts", required: false)
+}
