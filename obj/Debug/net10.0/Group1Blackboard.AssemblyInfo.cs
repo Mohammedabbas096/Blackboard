@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Group1Blackboard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5117e7558472a5438a8164f948fc7c8a5fb5a87c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Group1Blackboard")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Group1Blackboard")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

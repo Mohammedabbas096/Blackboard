@@ -1,5 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Render injects PORT env var; bind to it
+var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -12,7 +16,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// No UseHttpsRedirection — Render terminates TLS at the edge
 app.UseRouting();
 app.UseAuthorization();
 app.MapStaticAssets();
