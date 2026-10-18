@@ -1,6 +1,6 @@
-# Group1Blackboard
+# Group2Blackboard
 
-A team project built for **Internet Programming 2026FA** — Phase 1.
+A team project built for **Internet Programming 2026FA** — Phase 1 — **New Group 2**.
 
 This is an ASP.NET Core MVC web application that simulates a Blackboard-style
 student portal. It's organized into two separate areas: one for students and
@@ -66,9 +66,13 @@ Group1Blackboard/
 
 ## Team
 
-Group 1 — Internet Programming 2026FA
+**New Group 2 — Internet Programming 2026FA**
 
-Mohammed Ghouse Mohiuddin (Student ID: 1529883)
+| Name | Role |
+|---|---|
+| Ghouse Mohiuddin Mohammed | Team Member |
+| Sumaiyya Syed Zahiruddin | Team Member |
+| Yashwanth Gajula | Team Member |
 
 ---
 
