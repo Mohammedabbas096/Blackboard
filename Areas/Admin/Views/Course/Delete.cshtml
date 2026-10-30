@@ -1,0 +1,43 @@
+﻿@model Group1Blackboard.Models.Course
+@{
+    ViewData["Title"] = "Delete Course";
+}
+
+<h1>Delete Course</h1>
+<hr />
+
+@if (Model.Reservations.Any())
+{
+    <div class="alert alert-warning">
+        <strong>Cannot delete this course.</strong>
+        It has <strong>@Model.Reservations.Count</strong> student reservation(s).
+        Remove those reservations first or let students clear their plan.
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+}
+else
+{
+    <div class="alert alert-danger">
+        Are you sure you want to delete course <strong>@Model.CourseNumber – @Model.Title</strong>?
+        This action cannot be undone.
+    </div>
+
+    <dl class="row mb-3">
+        <dt class="col-sm-3">Course Number</dt>
+        <dd class="col-sm-9">@Model.CourseNumber</dd>
+        <dt class="col-sm-3">Title</dt>
+        <dd class="col-sm-9">@Model.Title</dd>
+        <dt class="col-sm-3">Major</dt>
+        <dd class="col-sm-9">@Model.Major?.Name</dd>
+        <dt class="col-sm-3">Instructor</dt>
+        <dd class="col-sm-9">@Model.Instructor?.FullName</dd>
+        <dt class="col-sm-3">Units</dt>
+        <dd class="col-sm-9">@Model.Units</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CourseId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary ms-1">Cancel</a>
+    </form>
+}

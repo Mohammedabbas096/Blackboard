@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Group1Blackboard.Areas.Admin.Controllers
 {
@@ -7,7 +7,7 @@ namespace Group1Blackboard.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return Content("Area: Admin | Controller: Student | Action: Index");
         }
     }
 }

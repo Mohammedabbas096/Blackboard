@@ -1,0 +1,32 @@
+﻿# Build results
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.pdb
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Reference archives and duplicate folders
+/aspnet_core_mvc/
+aspnet_core_mvc/
+/Blackboard/
+Blackboard/
+Team Project - 2.pdf
+
+# Environment and secrets
+*.env
+*.env.*
+appsettings.Production.json
+appsettings.Local.json

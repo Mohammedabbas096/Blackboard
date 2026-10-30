@@ -1,0 +1,46 @@
+﻿@model Group1Blackboard.Models.AppUser
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<h1>Delete User</h1>
+<hr />
+
+@if (Model.TeachingCourses.Any())
+{
+    <div class="alert alert-warning">
+        <strong>Cannot delete this user.</strong>
+        They are assigned as instructor for <strong>@Model.TeachingCourses.Count</strong> course(s).
+        Reassign those courses to another instructor first.
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+}
+else if (Model.Reservations.Any())
+{
+    <div class="alert alert-warning">
+        <strong>Cannot delete this user.</strong>
+        They have <strong>@Model.Reservations.Count</strong> course reservation(s) on file.
+        Reservation history must be preserved.
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+}
+else
+{
+    <div class="alert alert-danger">
+        Are you sure you want to delete user <strong>@Model.FullName</strong>?
+        <span>This action cannot be undone.</span>
+    </div>
+
+    <dl class="row mb-3">
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">@Model.FullName</dd>
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="UserId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary ms-1">Cancel</a>
+    </form>
+}

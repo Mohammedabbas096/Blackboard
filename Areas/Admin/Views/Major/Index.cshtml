@@ -1,14 +1,41 @@
+﻿@model IEnumerable<Group1Blackboard.Models.Major>
 @{
-    ViewData["Title"] = "Major Management";
+    ViewData["Title"] = "Majors";
 }
 
-<div class="p-4">
-    <h1 class="mb-3">Major Management</h1>
-    <p class="text-muted">Major management functionality will be implemented in a future phase.</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Majors</h1>
+    <a asp-action="Create" class="btn btn-primary">+ Add Major</a>
 </div>
 
-<div class="ms-4 text-muted small">
-    <strong>Area:</strong> Admin &nbsp;|&nbsp;
-    <strong>Controller:</strong> Major &nbsp;|&nbsp;
-    <strong>Action:</strong> Index
-</div>
+@if (!Model.Any())
+{
+    <p class="text-muted">No majors found. Add one to get started.</p>
+}
+else
+{
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Courses</th>
+                <th style="width:160px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var major in Model)
+            {
+                <tr>
+                    <td>@major.Name</td>
+                    <td>@major.Courses.Count</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@major.MajorId"
+                           class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@major.MajorId"
+                           class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

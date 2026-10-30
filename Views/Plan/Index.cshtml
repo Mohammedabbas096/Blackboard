@@ -1,0 +1,129 @@
+﻿@model PlanViewModel
+@{
+    ViewData["Title"] = "My Course Plan";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h2 mb-1">My Course Plan</h1>
+        <p class="text-muted mb-0">Temporary draft plan stored in your active session and persistent cookie.</p>
+    </div>
+    <div>
+        <a asp-action="Reservations" class="btn btn-outline-success">
+            View Confirmed Reservations
+        </a>
+    </div>
+</div>
+
+<!-- Plan Summary Header -->
+<div class="card mb-4 bg-light border-0 shadow-sm">
+    <div class="card-body d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div>
+            <span class="text-secondary small d-block">Demonstration Student</span>
+            <span class="fw-bold fs-5 text-dark">@Model.DemonstrationStudentName</span>
+            <span class="badge bg-secondary ms-2">ID: @Model.DemonstrationStudentId</span>
+        </div>
+        <div class="d-flex gap-4">
+            <div class="text-center">
+                <span class="text-secondary small d-block">Planned Courses</span>
+                <span class="fw-bold fs-4 text-primary">@Model.PlannedCourses.Count</span>
+            </div>
+            <div class="text-center">
+                <span class="text-secondary small d-block">Total Units</span>
+                <span class="fw-bold fs-4 text-primary">@Model.TotalUnits</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.PlannedCourses.Count == 0)
+{
+    <div class="card shadow-sm text-center py-5">
+        <div class="card-body">
+            <h4 class="text-muted mb-3">Your course plan is currently empty</h4>
+            <p class="text-secondary mb-4">Browse the university catalog to explore and select courses for your semester plan.</p>
+            <a asp-controller="Catalog" asp-action="Index" class="btn btn-primary px-4">
+                Browse Course Catalog
+            </a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="card shadow-sm border mb-4">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Course</th>
+                        <th>Title</th>
+                        <th>Major</th>
+                        <th>Instructor</th>
+                        <th>Schedule</th>
+                        <th class="text-center">Units</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.PlannedCourses)
+                    {
+                        bool isAlreadyReserved = Model.ExistingReservationCourseIds.Contains(course.CourseId);
+                        <tr>
+                            <td>
+                                <span class="badge bg-primary">@course.CourseNumber</span>
+                            </td>
+                            <td>
+                                <div class="fw-semibold">@course.Title</div>
+                                @if (isAlreadyReserved)
+                                {
+                                    <span class="badge bg-info text-dark small">Already Reserved in DB</span>
+                                }
+                            </td>
+                            <td>@course.Major.Name</td>
+                            <td>@course.Instructor.FullName</td>
+                            <td>@course.Schedule <span class="text-muted small">(@course.Time)</span></td>
+                            <td class="text-center fw-bold">@course.Units</td>
+                            <td class="text-end">
+                                <form asp-action="Remove" method="post" class="d-inline">
+                                    <input type="hidden" name="courseId" value="@course.CourseId" />
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Remove from plan">
+                                        Remove
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot class="table-light">
+                    <tr>
+                        <td colspan="5" class="text-end fw-bold">Total Units:</td>
+                        <td class="text-center fw-bold text-primary fs-5">@Model.TotalUnits</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- Actions Toolbar -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div class="d-flex gap-2">
+            <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-secondary">
+                &larr; Back to Catalog
+            </a>
+            <form asp-action="Clear" method="post" class="d-inline">
+                <button type="submit" class="btn btn-outline-warning"
+                        onclick="return confirm('Are you sure you want to clear all courses from your plan?');">
+                    Clear Plan
+                </button>
+            </form>
+        </div>
+        <div>
+            <form asp-action="Reserve" method="post" class="d-inline">
+                <button type="submit" class="btn btn-success btn-lg px-4 shadow-sm">
+                    Reserve Courses Now &rarr;
+                </button>
+            </form>
+        </div>
+    </div>
+}

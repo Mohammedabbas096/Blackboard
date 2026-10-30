@@ -1,14 +1,49 @@
+﻿@model IEnumerable<Group1Blackboard.Models.Course>
 @{
-    ViewData["Title"] = "Course Management";
+    ViewData["Title"] = "Courses";
 }
 
-<div class="p-4">
-    <h1 class="mb-3">Course Management</h1>
-    <p class="text-muted">Course management functionality will be implemented in a future phase.</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Courses</h1>
+    <a asp-action="Create" class="btn btn-primary">+ Add Course</a>
 </div>
 
-<div class="ms-4 text-muted small">
-    <strong>Area:</strong> Admin &nbsp;|&nbsp;
-    <strong>Controller:</strong> Course &nbsp;|&nbsp;
-    <strong>Action:</strong> Index
-</div>
+@if (!Model.Any())
+{
+    <p class="text-muted">No courses found. Add one to get started.</p>
+}
+else
+{
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Number</th>
+                <th>Title</th>
+                <th>Units</th>
+                <th>Schedule</th>
+                <th>Major</th>
+                <th>Instructor</th>
+                <th style="width:160px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.CourseNumber</td>
+                    <td>@course.Title</td>
+                    <td class="text-center">@course.Units</td>
+                    <td>@course.Schedule</td>
+                    <td>@course.Major?.Name</td>
+                    <td>@course.Instructor?.FullName</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@course.CourseId"
+                           class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@course.CourseId"
+                           class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

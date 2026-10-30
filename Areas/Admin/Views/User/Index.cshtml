@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Group1Blackboard.Models.AppUser>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Users</h1>
+    <a asp-action="Create" class="btn btn-primary">+ Add User</a>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No users found.</p>
+}
+else
+{
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th class="text-center">Teaching</th>
+                <th class="text-center">Reservations</th>
+                <th style="width:160px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td class="text-center">@user.TeachingCourses.Count</td>
+                    <td class="text-center">@user.Reservations.Count</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@user.UserId"
+                           class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@user.UserId"
+                           class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

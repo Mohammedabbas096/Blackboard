@@ -1,5 +1,6 @@
-@{
+﻿@{
     Layout = "_RootLayout";
+    string currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
 }
 
 <header>
@@ -16,22 +17,26 @@
             <div class="collapse navbar-collapse" id="adminNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Major" ? "active fw-bold" : "")"
+                        <a class="nav-link @(currentController == "Home" ? "active fw-bold" : "")"
+                           asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentController == "Major" ? "active fw-bold" : "")"
                            asp-area="Admin" asp-controller="Major" asp-action="Index">Major</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Course" ? "active fw-bold" : "")"
+                        <a class="nav-link @(currentController == "Course" ? "active fw-bold" : "")"
                            asp-area="Admin" asp-controller="Course" asp-action="Index">Course</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Student" ? "active fw-bold" : "")"
-                           asp-area="Admin" asp-controller="Student" asp-action="Index">Student</a>
+                        <a class="nav-link @(currentController == "User" ? "active fw-bold" : "")"
+                           asp-area="Admin" asp-controller="User" asp-action="Index">User</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-warning"
-                           asp-area="Student" asp-controller="Home" asp-action="Index">View Site</a>
+                        <a class="nav-link text-warning fw-semibold"
+                           asp-area="" asp-controller="Home" asp-action="Index">View Site &rarr;</a>
                     </li>
                 </ul>
             </div>
@@ -40,6 +45,22 @@
 </header>
 
 <div class="container">
+    @* Single-point TempData message rendering across all admin views *@
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
     <main role="main" class="pb-3">
         @RenderBody()
     </main>

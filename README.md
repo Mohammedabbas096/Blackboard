@@ -1,6 +1,6 @@
-# Group2Blackboard
+﻿# Group1Blackboard
 
-A team project built for **Internet Programming 2026FA** — Phase 1 — **New Group 2**.
+A team project built for **Internet Programming 2026FA** — Phase 1 — **Group 1**.
 
 This is an ASP.NET Core MVC web application that simulates a Blackboard-style
 student portal. It's organized into two separate areas: one for students and
