@@ -4,3 +4,10 @@ obj/
 *.user
 *.suo
 .vs/
+aspnet_core_mvc/
+Blackboard/
+Blackboard.db*
+*.db
+*.db-shm
+*.db-wal
+Team Project - 2.pdf

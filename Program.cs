@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Group1Blackboard.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,5 +56,12 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Execute pending EF Core migrations on startup to initialize and seed database
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<BlackboardContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
