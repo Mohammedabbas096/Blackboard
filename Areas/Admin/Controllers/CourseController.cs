@@ -1,4 +1,4 @@
-﻿using Group1Blackboard.Models;
+using Group1Blackboard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +38,12 @@ namespace Group1Blackboard.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Course course)
         {
+            string courseNumError = Check.CourseNumberExists(_db, course.CourseNumber);
+            if (!string.IsNullOrEmpty(courseNumError))
+            {
+                ModelState.AddModelError(nameof(course.CourseNumber), courseNumError);
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Courses.Add(course);
@@ -63,6 +69,12 @@ namespace Group1Blackboard.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Course course)
         {
+            string courseNumError = Check.CourseNumberExists(_db, course.CourseNumber, course.CourseId);
+            if (!string.IsNullOrEmpty(courseNumError))
+            {
+                ModelState.AddModelError(nameof(course.CourseNumber), courseNumError);
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Courses.Update(course);

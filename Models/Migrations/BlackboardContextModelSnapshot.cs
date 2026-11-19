@@ -23,6 +23,9 @@ namespace Group1Blackboard.Models.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -38,6 +41,16 @@ namespace Group1Blackboard.Models.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("SSN")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Users", (string)null);
@@ -46,30 +59,42 @@ namespace Group1Blackboard.Models.Migrations
                         new
                         {
                             UserId = 1,
+                            DOB = new DateTime(1954, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "alan.turing@university.edu",
                             FirstName = "Alan",
-                            LastName = "Turing"
+                            LastName = "Turing",
+                            SSN = "111-11-1111",
+                            UserType = "Instructor"
                         },
                         new
                         {
                             UserId = 2,
+                            DOB = new DateTime(1960, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "grace.hopper@university.edu",
                             FirstName = "Grace",
-                            LastName = "Hopper"
+                            LastName = "Hopper",
+                            SSN = "222-22-2222",
+                            UserType = "Instructor"
                         },
                         new
                         {
                             UserId = 3,
+                            DOB = new DateTime(1968, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "katherine.j@university.edu",
                             FirstName = "Katherine",
-                            LastName = "Johnson"
+                            LastName = "Johnson",
+                            SSN = "333-33-3333",
+                            UserType = "Instructor"
                         },
                         new
                         {
                             UserId = 4,
+                            DOB = new DateTime(2002, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "alex.mercer@student.edu",
                             FirstName = "Alex",
-                            LastName = "Mercer"
+                            LastName = "Mercer",
+                            SSN = "444-44-4444",
+                            UserType = "Student"
                         });
                 });
 
@@ -92,12 +117,22 @@ namespace Group1Blackboard.Models.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("MajorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Schedule")
                         .IsRequired()
                         .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Semester")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Time")
@@ -125,11 +160,13 @@ namespace Group1Blackboard.Models.Migrations
                         new
                         {
                             CourseId = 1,
-                            CourseNumber = "CS 101",
+                            CourseNumber = "CS101",
                             Description = "Fundamental programming principles and problem solving using C#.",
                             InstructorId = 1,
+                            Location = "Hall 101",
                             MajorId = 1,
                             Schedule = "MWF",
+                            Semester = "Fall 2026",
                             Time = "09:00 AM - 09:50 AM",
                             Title = "Introduction to Computer Science",
                             Units = 3
@@ -137,11 +174,13 @@ namespace Group1Blackboard.Models.Migrations
                         new
                         {
                             CourseId = 2,
-                            CourseNumber = "CS 201",
+                            CourseNumber = "CS201",
                             Description = "Study of fundamental data structures including lists, stacks, queues, trees, and graphs.",
                             InstructorId = 1,
+                            Location = "Lab 204",
                             MajorId = 1,
                             Schedule = "TR",
+                            Semester = "Fall 2026",
                             Time = "10:00 AM - 11:15 AM",
                             Title = "Data Structures and Algorithms",
                             Units = 4
@@ -149,11 +188,13 @@ namespace Group1Blackboard.Models.Migrations
                         new
                         {
                             CourseId = 3,
-                            CourseNumber = "IT 210",
+                            CourseNumber = "IT210",
                             Description = "Building modern web applications using MVC, Razor, and Entity Framework Core.",
                             InstructorId = 2,
+                            Location = "Technology Center 105",
                             MajorId = 2,
                             Schedule = "MWF",
+                            Semester = "Fall 2026",
                             Time = "11:00 AM - 11:50 AM",
                             Title = "Web Development with ASP.NET Core",
                             Units = 3
@@ -161,11 +202,13 @@ namespace Group1Blackboard.Models.Migrations
                         new
                         {
                             CourseId = 4,
-                            CourseNumber = "IT 330",
+                            CourseNumber = "IT330",
                             Description = "Relational database concepts, SQL queries, normalization, and database design.",
                             InstructorId = 2,
+                            Location = "Technology Center 210",
                             MajorId = 2,
                             Schedule = "TR",
+                            Semester = "Spring 2027",
                             Time = "01:00 PM - 02:15 PM",
                             Title = "Database Systems & Design",
                             Units = 3
@@ -173,11 +216,13 @@ namespace Group1Blackboard.Models.Migrations
                         new
                         {
                             CourseId = 5,
-                            CourseNumber = "MATH 150",
+                            CourseNumber = "MATH150",
                             Description = "Limits, continuity, derivatives, and introduction to integration.",
                             InstructorId = 3,
+                            Location = "Science Hall 301",
                             MajorId = 3,
                             Schedule = "MWF",
+                            Semester = "Fall 2026",
                             Time = "08:00 AM - 08:50 AM",
                             Title = "Calculus I",
                             Units = 4
@@ -185,11 +230,13 @@ namespace Group1Blackboard.Models.Migrations
                         new
                         {
                             CourseId = 6,
-                            CourseNumber = "ENG 101",
+                            CourseNumber = "ENG101",
                             Description = "College-level expository and analytical writing with rhetorical focus.",
                             InstructorId = 3,
+                            Location = "Online",
                             MajorId = 4,
                             Schedule = "Online",
+                            Semester = "Fall 2026",
                             Time = "Asynchronous",
                             Title = "Academic Writing",
                             Units = 3

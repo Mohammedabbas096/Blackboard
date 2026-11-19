@@ -1,4 +1,4 @@
-﻿using Group1Blackboard.Models;
+using Group1Blackboard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +37,12 @@ namespace Group1Blackboard.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AppUser user)
         {
+            string emailError = Check.EmailExists(_db, user.Email);
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                ModelState.AddModelError(nameof(user.Email), emailError);
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Users.Add(user);
@@ -60,6 +66,12 @@ namespace Group1Blackboard.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AppUser user)
         {
+            string emailError = Check.EmailExists(_db, user.Email, user.UserId);
+            if (!string.IsNullOrEmpty(emailError))
+            {
+                ModelState.AddModelError(nameof(user.Email), emailError);
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Users.Update(user);

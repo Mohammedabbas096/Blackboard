@@ -1,4 +1,4 @@
-﻿@model Group1Blackboard.Models.Course
+@model Group1Blackboard.Models.Course
 @{
     ViewData["Title"] = "Edit Course";
 }
@@ -13,40 +13,53 @@
             <input type="hidden" asp-for="CourseId" />
 
             <div class="mb-3">
-                <label asp-for="CourseNumber" class="form-label"></label>
+                <label asp-for="CourseNumber" class="form-label">Course Number</label>
                 <input asp-for="CourseNumber" class="form-control" />
                 <span asp-validation-for="CourseNumber" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Title" class="form-label"></label>
+                <label asp-for="Title" class="form-label">Course Name</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Description" class="form-label"></label>
+                <label asp-for="Description" class="form-label">Description</label>
                 <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label asp-for="Units" class="form-label"></label>
+                    <label asp-for="Units" class="form-label">Credit</label>
                     <input asp-for="Units" class="form-control" type="number" min="1" max="6" />
                     <span asp-validation-for="Units" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label asp-for="Schedule" class="form-label"></label>
+                    <label asp-for="Schedule" class="form-label">Schedule</label>
                     <select asp-for="Schedule" asp-items="ViewBag.Schedules" class="form-select">
-                        <option value="">-- Select --</option>
+                        <option value="">-- Select Schedule --</option>
                     </select>
                     <span asp-validation-for="Schedule" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label asp-for="Time" class="form-label"></label>
+                    <label asp-for="Time" class="form-label">Times</label>
                     <input asp-for="Time" class="form-control" />
                     <span asp-validation-for="Time" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Semester" class="form-label">Semester</label>
+                    <input asp-for="Semester" class="form-control" />
+                    <span asp-validation-for="Semester" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Location" class="form-label">Location</label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
                 </div>
             </div>
 
