@@ -59,4 +59,3 @@ namespace Group1Blackboard.Models
             ErrorMessage ?? $"Date of birth must be a past date, no more than {MaxYears} years ago.";
     }
 }
-

@@ -32,4 +32,3 @@ namespace Group1Blackboard.Models
         }
     }
 }
-
